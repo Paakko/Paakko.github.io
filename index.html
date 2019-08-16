@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Parallax scroll test</title>
+		<style>
+			html, body
+			{
+				background-color: #686868;
+				color: #000;
+				margin: 0;
+			}
+			#background
+			{
+				z-index: 1;
+				position: fixed;
+				width: 100vw;
+				background-image: url("some_image.jpg");
+				background-size: cover;
+			}
+			#background img
+			{
+				width: 100vw;
+			}
+			#header, #content
+			{
+				z-index: 2;
+			}
+			#content, #footer
+			{
+				position: absolute;
+				width: 100vw;
+				background-color: aquamarine;
+			}
+			#footer
+			{
+				background: red;
+			}
+		</style>
+			<script type="text/javascript">
+		</script>
+	</head>
+	<body>
+	<div id="background"><!--img src="some_image.jpg"--></div>
+	<div id="header"></div>
+	<div id="content">Bla bla bla content content content
+		<img src="some_image.jpg">
+	</div>
+	<div id="footer">Footer</div>
+	<script type="text/javascript">
+		window.addEventListener("resize", recalculate);
+		window.addEventListener("scroll", recalculate);
+
+		const PARALLAX_AMOUNT = 0.3;
+
+		function recalculate(event)
+		{
+			const {innerWidth, innerHeight, scrollY} = window;
+			document.getElementById("background").style.height = innerHeight + "px";
+			document.getElementById("background").style.transform = `translateY(${-scrollY * PARALLAX_AMOUNT}px)`;
+			document.getElementById("header").style.height = innerHeight + "px";
+		}
+
+		recalculate();
+	</script>
+</body>
+</html>
